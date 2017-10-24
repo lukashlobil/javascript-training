@@ -3,8 +3,8 @@ var Zapisky // Tohle bude slouzit jako log zapisku a brain-stormigu
 zalezi na implentaci na kazdem browseru (jak bude js zobrazovat pro uzivatele)
 drive se psalo nekolik druhu kodu, ted jiz neni potreba
 
-oficialni vyraz je EkmaScript
-	oficialni je es.6 (= ekma script 6)
+oficialni vyraz je ECMAScript
+	oficialni je es.6 (= ecma script 6)
 	
 objekty
 	dom (document object model - z ceho se stranka hierarchicky sklada - head, body)
