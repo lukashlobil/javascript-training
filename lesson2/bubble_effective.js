@@ -8,16 +8,16 @@ var j = 0;
 var sortedArray = false;
 
 do {
-    sortedArray = true;
-    for (var i = 0; i < array1.length; i++) {
-        if (array1[i] > array1[i + 1]) {
-            swap1 = array1[i];
-            array1[i] = array1[i + 1];
-            array1[i + 1] = swap1;
-            sortedArray = false;
+	sortedArray = true;
+	for (var i = 0; i < array1.length; i++) {
+		if (array1[i] > array1[i + 1]) {
+			swap1 = array1[i];
+			array1[i] = array1[i + 1];
+			array1[i + 1] = swap1;
+			sortedArray = false;
 
-        }
-        j++;
-    }
+		}
+		j++;
+	}
 } while (sortedArray === false);
 console.log('array length: ' + array1.length + ', ran ' + j + ' times');
