@@ -3,28 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Games form</title>
+    <script src="./games.js"></script>
+    <link rel="stylesheet" href="games.css"/>
 </head>
 <body>
 <h1>Game library</h1>
 <p>Welcome to the game library, you can add games and you can list games based on the genre and rating</p>
 <h2>Add game</h2>
-<form name="create">
-    <label for="c_name">Name</label>
+    <label class="labels" for="c_name">Name</label>
     <input type="text" name="create_name" id="c_name"/>
 
-    <label for="c_type">Genre</label>
-    <select id="c_type">
+    <label for="c_genre" class="labels">Genre</label>
+    <select id="c_genre">
         <option value="FPS">FPS</option>
         <option value="strategy">Strategy</option>
         <option value="platformer">Platformer</option>
         <option value="arcade">Arcade</option>
     </select>
 
-    <label for="c_rating">Rating</label>
+    <label for="c_rating" class="labels">Rating</label>
     <input id="c_rating" type="number">
 
-    <input type="submit" value="Add" onClick="send(this.form)">
+    <button value="Add" onClick="send()">Add</button>
 
-</form>
+<ul id="v_list" class="c_list">
+</ul>
+
+<select id="f_genre">
+    <option value="FPS">FPS</option>
+    <option value="strategy">Strategy</option>
+    <option value="platformer">Platformer</option>
+    <option value="arcade">Arcade</option>
+</select>
+<ul id="v_genre"></ul>
+
+<h2>Worst game ever</h2>
+<div id="worst"></div>
 </body>
 </html>

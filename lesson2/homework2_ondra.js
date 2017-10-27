@@ -10,15 +10,15 @@ var minG = 0;
 var maxG = 0;
 
 for (var i = 0; i < arr.length; i++) {
-    minG = i; //stores index
+	minG = i; //stores index
 
-    for (var j = i + 1; j < arr.length; j++) {
-        if (arr[j] < arr[minG]) // compares values on i and next index
-            minG = j; // if next alue of index is lower -> minG stores value on i + 1 index
-    }
-    maxG = arr[i]; // if previous condition is not met -> maxG value of the index is now stored as maxG
-    arr[i] = arr[minG]; // swaps those values
-    arr[minG] = maxG;
+	for (var j = i + 1; j < arr.length; j++) {
+		if (arr[j] < arr[minG]) // compares values on i and next index
+			minG = j; // if next alue of index is lower -> minG stores value on i + 1 index
+	}
+	maxG = arr[i]; // if previous condition is not met -> maxG value of the index is now stored as maxG
+	arr[i] = arr[minG]; // swaps those values
+	arr[minG] = maxG;
 }
 
 console.log('Sum of indexes = ' + i);
