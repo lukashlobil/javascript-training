@@ -1,6 +1,4 @@
-window.onload = function () {
-	ready();
-};
+window.onload = ready;
 
 var games = [
 	{genre: 'platformer', name: 'Commander Keen', rating: 6},
@@ -19,11 +17,11 @@ function send() {
 	myGenre = document.getElementById('c_genre').value;
 	game = {genre: myGenre, name: myName, rating: myRating};
 	games.push(game); // = games[games.length+1] = game;
-	create(game);
+	create(game, 'v_list');
 }
 
-function create(myGame) {
-	var list = document.getElementById('v_list');
+function create(myGame, myList) {
+	var list = document.getElementById(myList);
 	var listItem = document.createElement('li');
 	var text = document.createTextNode(myGame.name + ', ' + myGame.genre + ', ' + myGame.rating);
 	listItem.appendChild(text);
@@ -32,23 +30,35 @@ function create(myGame) {
 
 function ready() {
 	for (var i = 0; i < games.length; i++) {
-		create(games[i]);
+		create(games[i], 'v_list');
 	}
 	worst();
+	genreList();
 }
+
+function genreList() {
+	emptyList('v_genre');
+	var genre = document.getElementById('f_genre').value;
+	for (var i = 0; i < games.length; i++) {
+		if (games[i].genre === genre) {
+			create(games[i], 'v_genre');
+		}
+	}
+}
+
+function emptyList(listName) {
+	var myList = document.getElementById(listName);
+	while (myList.hasChildNodes()) {
+		myList.removeChild(myList.lastChild);
+	}
+}
+
 
 function worst() {
 	var worstGameEver;
-	var worst = document.getElementById('worst');
-	var worstText = document.createElement('p');
 	for (var i = 0; i < games.length; i++) {
 		if (i < games.length - 1) {
 			if (games[i].rating < games[i + 1].rating) worstGameEver = games[i];
 		}
 	}
-	console.log(worstGameEver);
-	var worstGame = document.createTextNode(worstGameEver.name + ', ' + worstGameEver.genre + ', ' + worstGameEver.rating);
-	worstText.appendChild(worstGame);
-	worst.appendChild(worstText);
-
 }
