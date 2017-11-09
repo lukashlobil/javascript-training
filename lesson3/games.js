@@ -1,6 +1,13 @@
 window.onload = ready;
+var iziModalConf = {
+	fullscreen: true,
+	subtitle: 'subtitle',
+	title: 'server error',
+	timeout: 10000,
+	timeoutProgressbar: true
+};
 
-var games = [
+/*var games = [
 	{genre: 'platformer', name: 'Commander Keen', rating: 6},
 	{genre: 'platformer', name: 'Ori nad the Blind Forest', rating: 9},
 	{genre: 'arcade', name: 'PacMan', rating: 9},
@@ -8,19 +15,32 @@ var games = [
 	{genre: 'FPS', name: 'Wolfenstein 3D', rating: 7},
 	{genre: 'FPS', name: 'Call of Duty', rating: 1},
 	{genre: 'strategy', name: 'Age of Empires', rating: 2}
-];
+];*/
+
+var games = [];
 
 /**
  * send a game from html
  */
-function send() {
+function send(game) {
+	games.push(game); // = games[games.length+1] = game;
+	create(game, 'v_list');
+}
+
+function validate() {
+	var result = true;
 	var myName, myRating, myGenre, game;
 	myName = document.getElementById('c_name').value;
 	myRating = document.getElementById('c_rating').value;
 	myGenre = document.getElementById('c_genre').value;
 	game = {genre: myGenre, name: myName, rating: myRating};
-	games.push(game); // = games[games.length+1] = game;
-	create(game, 'v_list');
+	if (myName.length > 20 || myName < 2) result = false;
+	if (myRating > 10 || myRating < 0) result = false;
+	if (result) send(game);
+	else {
+		$('.header').replaceWith('<h1 class="header">validation failed</h1>');
+		$('#modal').iziModal('open');
+	}
 }
 
 /**
@@ -40,11 +60,15 @@ function create(myGame, myList) {
  * gets called when document is ready
  */
 function ready() {
+	$('#modal').iziModal(iziModalConf);
+	getGames();
+	genreList();
+}
+
+function populate() {
 	for (var i = 0; i < games.length; i++) {
 		create(games[i], 'v_list');
 	}
-	worst(0);
-	genreList();
 }
 
 /**
@@ -111,4 +135,29 @@ function swap(a, b, arrayToSwap) {
 	var temp = arrayToSwap[a];
 	arrayToSwap[a] = arrayToSwap[b];
 	arrayToSwap[b] = temp;
+}
+
+function getGames() {
+	$.ajax('http://localhost:8000/games')
+		.done(function (data) {
+			games = data;
+			populate();
+			worst(0);
+			changeClass('active');
+		}).fail(function (err) {
+			console.log(err);
+			$('.header').replaceWith('<h1 class="header">' + err.statusText + '</h1>');
+			changeClass('notActive');
+			$('#modal').iziModal('open');
+		});
+}
+
+function changeClass(classToChange) {
+	var serverStatus = document.getElementById('server');
+	for (var i = 0; i < serverStatus.classList.length; i++) {
+		if (serverStatus.classList[i] === 'unknown') {
+			serverStatus.classList.add(classToChange);
+			serverStatus.classList.remove('unknown');
+		}
+	}
 }

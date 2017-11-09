@@ -6,3 +6,18 @@
 .c_list {
     background-color: red;
 }
+
+.unknown {
+	background-color: aqua;
+	color: blue;
+}
+
+.active {
+	background-color: green;
+	color: orange;
+}
+
+.notActive {
+	background-color: red;
+	color: ghostwhite;
+}

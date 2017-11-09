@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Games form</title>
-    <script src="./games.js"></script>
-    <link rel="stylesheet" href="games.css"/>
+	<meta charset="UTF-8">
+	<title>Games form</title>
+	<script src="libraries/jquery-3.2.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script>
+	<script src="./games.js"></script>
+	<link rel="stylesheet" href="games.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.min.css"/>
 </head>
 <body>
 <h1>Game library</h1>
+<div id="modal">
+	<h1 class="header">modal</h1>
+</div>
 <p>Welcome to the game library, you can add games and you can list games based on the genre and rating</p>
+<div id="server" class="unknown">Games status:
+	<div>unknown</div>
+</div>
 <h2>Add game</h2>
-    <label class="labels" for="c_name">Name</label>
-    <input type="text" name="create_name" id="c_name"/>
+<label class="labels" for="c_name">Name</label>
+<input type="text" name="create_name" id="c_name"/>
 
-    <label for="c_genre" class="labels">Genre</label>
-    <select id="c_genre">
-        <option value="FPS">FPS</option>
-        <option value="strategy">Strategy</option>
-        <option value="platformer">Platformer</option>
-        <option value="arcade">Arcade</option>
-    </select>
+<label for="c_genre" class="labels">Genre</label>
+<select id="c_genre">
+	<option value="FPS">FPS</option>
+	<option value="strategy">Strategy</option>
+	<option value="platformer">Platformer</option>
+	<option value="arcade">Arcade</option>
+</select>
 
-    <label for="c_rating" class="labels">Rating</label>
-    <input id="c_rating" type="number">
+<label for="c_rating" class="labels">Rating</label>
+<input id="c_rating" type="number">
 
-    <button value="Add" onClick="send()">Add</button>
+<button value="Add" onClick="validate();">Add</button>
 
 <ul id="v_list" class="c_list">
 </ul>
 
-<select id="f_genre" onchange="genreList()">
-    <option value="FPS">FPS</option>
-    <option value="strategy">Strategy</option>
-    <option value="platformer">Platformer</option>
-    <option value="arcade">Arcade</option>
+<select id="f_genre" onchange="genreList();">
+	<option value="FPS">FPS</option>
+	<option value="strategy">Strategy</option>
+	<option value="platformer">Platformer</option>
+	<option value="arcade">Arcade</option>
 </select>
 <ul id="v_genre"></ul>
 
-<select id="s_count" onchange="worst()">
+<select id="s_count" onchange="worst();">
 	<option value="1">1</option>
 	<option value="2">2</option>
 	<option value="3">3</option>
